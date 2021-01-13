@@ -182,7 +182,7 @@ if(hasRecordFile); fclose(fid); end
 out.iter = iter;
 out.search = tot_sea;
 out.feasi = feasi;
-out.success = 1;
+if(~flag); out.success = 1; end
 out.time = toc(ptimetic);
 
 %--------------------------------------------------------------------------
