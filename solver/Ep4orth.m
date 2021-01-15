@@ -221,7 +221,12 @@ for iter=1:maxiter
 end % end outer loop
 
 % round solution X
-if(abs(subout.feasi-1)<=rounding); X = round_st(X); end
+if(abs(subout.feasi-1)<=rounding)
+    X = round_st(X);
+    out.post = 1;
+else
+    out.post = 0;
+end
 
 %--------------------------------------------------------------------------
 % store the iter. info.

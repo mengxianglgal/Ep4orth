@@ -222,11 +222,16 @@ for out_iter = 1: maxoit
 end
 
 % round X to a feasible solution
-if(feasi<rounding);  X = round_st(X); end
-
-% post-processing, solve the projection problem restricted on the supp(X)
-Cpost = C.*(X>0);
-X = proj_ob(Cpost);
+if(feasi<rounding) 
+    X = round_st(X); 
+    out.post = 1;
+    
+    % post-processing, solve the problem restricted on the supp(X)
+    Cpost = C.*(X>0);
+    X = proj_ob(Cpost);
+else
+    out.post = 0;
+end
 
 %-------------------------------------------------------------------------
 % store the iter. info.

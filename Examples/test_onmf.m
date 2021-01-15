@@ -20,7 +20,7 @@ function test_onmf
 
 % choose examples
 % Problist = [1:9];
-Problist = 1:9;
+Problist = 3;
 
 % whether record iter. info
 record = 1;
@@ -137,7 +137,6 @@ for dprob = Problist
     [pur, ent] = comp_pe(Y,true_ans,1e-8);
     feasi = norm(X'*X-eye(test_label),'fro');
     fprintf(strnum, 'case',dprob,pur,ent,time,feasi);
-    
     
 end
 end

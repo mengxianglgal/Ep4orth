@@ -193,7 +193,23 @@ for iter=1:maxiter
 end % end outer loop
 
 % round solution X
-if(abs(subout.feasi-1)<=rounding); X = round_st(X); end
+if(abs(subout.feasi-1)<=rounding)
+    X = round_st(X);
+    out.post = 1;
+    
+    % postprocessing
+    X2 = zeros(n,k);
+    for i=1:k
+        suppX = find(X(:,i)>0);
+        [eigva,eigve] = svds(A(suppX,:)*A(suppX,:)',1);
+        if(sum(eigva)<0); eigva = eigva*-1; end
+        X2(suppX,i) = eigva;
+    end
+    
+else
+    out.post = 0;
+end
+
 
 %--------------------------------------------------------------------------
 % store the iter. info.
