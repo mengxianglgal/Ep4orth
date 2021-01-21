@@ -138,7 +138,8 @@ while(true)
     Qp = Q; Q = gamma*Qp+1; fref = (gamma*Qp*fref+fval_n)/Q;
     
     % compute gradient of the subproblem
-    pgrad = grad(X)+2*sigma*p*(tmp_fea^(p-1))*(X_v*V');
+    gx = grad(X);
+    pgrad = gx+2*sigma*p*(tmp_fea^(p-1))*(X_v*V');
     
     % calculate BB stepsize
     S = X-X_pre;
@@ -171,7 +172,7 @@ while(true)
     
     % check stopping criteria
     if(iter>=maxiter); break; end
-    if(norm(proj_ob(X-grad(X))-X,'fro')<tol&&iter>=3); break; end
+    if(norm(proj_ob(X-gx)-X,'fro')<tol&&iter>=3); break; end
     
 end % end outer loop
 
